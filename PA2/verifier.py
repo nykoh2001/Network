@@ -1,3 +1,4 @@
+# generator와 동일하게 구현된 XOR, divide
 def XOR(frame:str, dividor: str) -> str:
   frame_len, dividor_len = len(frame), len(dividor)
   frame = list(frame.strip())
@@ -23,16 +24,22 @@ def divide(frame:str, gen:str) -> str:
     
 
 def main():
-  with open("gen_output.txt", "r") as f:
+  with open("./text/gen_output.txt", "r") as f:
     lines = f.readlines()
   frame, generator = lines 
 
   remainder = divide(frame.rstrip(), generator)
   print("remainder:", remainder)
-  with open("veri_output.txt", "w") as f:
+  with open("./text/veri_output.txt", "w") as f:
+    # 나머지 값이 전부 0이면 옳은 프레임, 그렇지 않으면 에러 발생
     if remainder == "0" * len(generator):
+      print("CORRECT")
       f.write("CORRECT")
-    else: f.write("WRONG")
+    else: 
+      print("WRONG")
+      f.write("WRONG")
   
 if __name__ == "__main__":
+  print("VERIFIER")
   main()
+  print()
